@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Moviely.Models.Customer>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+@Html.ActionLink("New Customer", "CustomerForm", "Customer", new { Id = 0 }, new { @class = "btn btn-primary" })
+
+
+@if (!Model.Any())
+{
+    <p> No one has rented this movie before</p>
+}
+else
+
+{
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Membership Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@Html.ActionLink(@customer.Name, "Edit", "Customer", new { Id = customer.Id }, null) </td>
+                    <td>@customer.MembershipType.Name </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+}
